@@ -4,7 +4,12 @@ const elStart = document.querySelector('#start'),
     elPokemon = document.querySelector('#pokemon'),
     template = document.querySelector('.template'),
     form = document.querySelector('.form'),
-    pokemonList = document.querySelector('.pokemon-list')
+    pokemonList = document.querySelector('.pokemon-list'),
+    pokemonLink = document.querySelector('.pokemonlink')
+
+	pokemonLink.addEventListener('click', function() {
+		template.classList.remove('showPokemon')
+	})
 
 const sections = {
     

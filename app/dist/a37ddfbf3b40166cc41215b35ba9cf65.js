@@ -88,7 +88,12 @@ var elStart = document.querySelector('#start'),
     elPokemon = document.querySelector('#pokemon'),
     template = document.querySelector('.template'),
     form = document.querySelector('.form'),
-    pokemonList = document.querySelector('.pokemon-list');
+    pokemonList = document.querySelector('.pokemon-list'),
+    pokemonLink = document.querySelector('.pokemonlink');
+
+pokemonLink.addEventListener('click', function () {
+    template.classList.remove('showPokemon');
+});
 
 var sections = {
 
@@ -588,16 +593,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (function () {
 	'strict mode'; // doet een aantal semantische dingetjes, zoals het veranderen van silent errors in throw errors en andere dingetjes
 
-	var template = document.querySelector('.template');
-
-	var pokemonList = document.querySelector('.pokemon-list'),
-	    pokemonLink = document.querySelector('.pokemonlink');
-
-	pokemonLink.addEventListener('click', function () {
-		template.classList.remove('showPokemon');
-	});
-
 	// Start Application
+
 	_app2.default.init();
 })();
 },{"./app":7}],35:[function(require,module,exports) {

@@ -21,7 +21,7 @@ First it makes an API call to the root of the API where all the names and the UR
 
 ## Getting started
 
-To started the local server, run the following command in the terminal
+To start the local server, run the following command in the terminal
 
 `parcel index.html`
 
@@ -38,7 +38,7 @@ Transparency let's you render certain parts of your website based on data in an 
 
 ## Object methods
 
-![flow of the app](https://i.imgur.com/7EIoVXa.png)
+![flow of the app](https://i.imgur.com/O40wkgu.png)
 
 ## Interaction
 
