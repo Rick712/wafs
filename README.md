@@ -32,11 +32,12 @@ The web app is purely made in HTML/CSS/JS.
 We did need to use two micro libraries:
 
 [Transparency JS](https://github.com/leonidas/transparency)
+
 [Routie](https://github.com/jgallen23/routie)
 
 Transparency let's you render certain parts of your website based on data in an object, and Routie makes it easy to toggle area's based on hash change.
 
-## Object methods
+## Object method
 
 ![flow of the app](https://i.imgur.com/O40wkgu.png)
 
