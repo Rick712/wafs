@@ -15,7 +15,7 @@ const routes = {
             },
 
             'pokemon/:id': function(obj) {
-                api.openPokemonInfo(obj)
+                api.pokemonDetail(obj)
             }
         })
     }

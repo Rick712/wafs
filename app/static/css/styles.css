@@ -53,13 +53,16 @@ table {
 
 main {
     margin: 0 1em;
-    margin-top: 30em;
 }
 
-section > div,
-#pokemon {
-    display: grid;
-    grid-template-columns: 100%;
+#pokemon > div:first-child {
+}
+
+#pokemon h1 {
+    margin: 0;
+    margin-top: 1em;
+    margin-bottom: .5em;
+    text-align: left;
 }
 
 section div p {
@@ -139,6 +142,7 @@ h1 {
     font-weight: 700;
     text-align: center;
     margin-bottom: 1em;
+    margin-top: 15rem;
 }
 
 p {
@@ -155,16 +159,6 @@ p {
     text-transform: uppercase;
 }
 
-.template {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    top: 100vh;
-    background-color: white;
-    transition: top .3s ease;
-}
-
 .showPokemon {
     top: 0;
     transition: top .3s ease;
@@ -177,10 +171,10 @@ p {
 .template a {
     cursor: pointer;
     position: absolute;
-    font-size: 2em;
+    font-size: 1em;
     font-weight: 700;
-    right: 1em;
-    top: 1em;
+    left: 1em;
+    top: 4em;
 }
 
 .gone {
@@ -198,17 +192,45 @@ p {
 
 .button {
     padding: .5em 1em;
-    background-color:rgb(255, 252, 213);
-    border: solid black .2em;
+    background-color:rgb(255, 255, 255);
+    border: solid rgb(43, 43, 43) .2em;
     transition: 
         background-color .3s ease,
         color .3s ease;
     color: black;
 }
 
+.template {
+    width: 30rem;
+    margin: 0 auto;
+    margin-top: 8rem;
+}
+
+.stats {
+    float: right;
+}
+
+.sprites,
+.sprites_shiny {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sprites h2 {
+    margin-bottom: 2rem;
+}
+
+.physical {
+    float: left;
+}
+
+.template h2 {
+    text-align: center;
+}
+
 .button:hover {
-    background-color:black;
-    color: rgb(255, 252, 213);
+    background-color:rgb(43, 43, 43);
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
@@ -224,17 +246,6 @@ p {
 @media screen and (min-width: 50rem) {
     main {
         margin: 0 2em;
-        margin-top: 15em;
-    }
-
-    .template a {
-        display: none;
-    }
-
-    section > div,
-    #pokemon {
-        grid-template-columns: 48% 48%;
-        grid-column-gap: 4%;
     }
 
     header {
@@ -248,15 +259,5 @@ p {
 
     header nav ul li a {
         font-size: 16px;
-    }
-
-    .template {
-        position: fixed;
-        right: 20em;
-        top: auto;
-        bottom: auto;
-        left: auto;
-        background-color: transparent;
-        display: block;
     }
 }

@@ -77,8 +77,18 @@ require = (function (modules, cache, entry) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _script = require('./script');
+
+var _script2 = _interopRequireDefault(_script);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var elStart = document.querySelector('#start'),
-    elPokemon = document.querySelector('#pokemon');
+    elPokemon = document.querySelector('#pokemon'),
+    template = document.querySelector('.template'),
+    form = document.querySelector('.form'),
+    pokemonList = document.querySelector('.pokemon-list');
 
 var sections = {
 
@@ -90,11 +100,17 @@ var sections = {
     pokemon: function pokemon() {
         elPokemon.classList.remove('no-display');
         elStart.classList.add('no-display');
+    },
+
+    back: function back() {
+        template.classList.add('gone');
+        form.classList.remove('gone');
+        pokemonList.classList.remove('gone');
     }
 };
 
 exports.default = sections;
-},{}],4:[function(require,module,exports) {
+},{"./script":5}],4:[function(require,module,exports) {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*!
@@ -310,6 +326,24 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var order = {
+
+    makeList: function makeList(pokemon) {
+
+        pokemon.forEach(function (i) {
+            var obj = i;
+            var pokemonListItem = document.createElement('li'),
+                elPokemonLink = document.createElement('a'),
+                name = document.createTextNode(obj.name),
+                elPokemonList = document.querySelector('.pokemon-list');
+
+            pokemonListItem.appendChild(elPokemonLink);
+            elPokemonLink.setAttribute('href', '#pokemon/' + obj.name);
+            elPokemonLink.appendChild(name);
+            elPokemonList.appendChild(pokemonListItem);
+            pokemonListItem.className = 'pokemon';
+        });
+    },
+
     pokemon: function pokemon(_pokemon) {
 
         var pokemonButton = document.querySelector('.button'),
@@ -327,23 +361,6 @@ var order = {
                 var currPokemon = document.querySelector('[href="' + el.name + '"]');
                 currPokemon.parentNode.classList.add('gone');
             });
-        });
-    },
-
-    makeList: function makeList(pokemon) {
-
-        pokemon.forEach(function (i) {
-            var obj = i;
-            var pokemonListItem = document.createElement('li'),
-                elPokemonLink = document.createElement('a'),
-                name = document.createTextNode(obj.name),
-                elPokemonList = document.querySelector('.pokemon-list');
-
-            pokemonListItem.appendChild(elPokemonLink);
-            elPokemonLink.setAttribute('href', '#pokemon/' + obj.name);
-            elPokemonLink.appendChild(name);
-            elPokemonList.appendChild(pokemonListItem);
-            pokemonListItem.className = 'pokemon';
         });
     }
 };
@@ -376,7 +393,7 @@ var template = document.querySelector('.template'),
 var obj = {},
     newObj = {}; // JS declared de variables boven aan de scope
 
-var api = { // object met .call, .orderPokemon, .makeList en .openPokemonInfo method,
+var api = { // object met .call, .orderPokemon, .makeList en .pokemonDetail method,
 
     call: function call() {
         var request = new XMLHttpRequest();
@@ -391,32 +408,39 @@ var api = { // object met .call, .orderPokemon, .makeList en .openPokemonInfo me
                 _order2.default.makeList(pokemon);
                 _order2.default.pokemon(pokemon);
 
-                // closure is een functie in een functie waar de parent functie nog steeds bij de child functie kan
+                // closure is een functie in een functie waar de child functie nog steeds bij de parent functie kan
 
-                var loading = document.querySelector('.loading');
-                loading.style.display = "none";
+                var _loading = document.querySelector('.loading');
+                _loading.classList.add('gone');
             }
         };
         request.onerror = function () {
-            var loading = document.querySelector('.error');
-            loading.style.display = "block"; // callback voor als er wat fout gaat
+            var elError = document.querySelector('.error');
+            elError.classList.remove('gone');
         };
 
         request.timeout = function () {
-            var loading = document.querySelector('.error');
-            loading.style.display = "block";
+            var elTimeOut = document.querySelector('.timeOut');
+            elTimeOut.classList.remove('gone');
         };
 
         request.send();
     },
 
-    openPokemonInfo: function openPokemonInfo(obj) {
+    pokemonDetail: function pokemonDetail(obj) {
         var newRequest = new XMLHttpRequest();
         newRequest.open('GET', 'https://www.pokeapi.co/api/v2/pokemon/' + obj, true);
 
         newRequest.onload = function () {
 
             if (newRequest.status >= 200 && newRequest.status < 400) {
+
+                var list = document.querySelector('.pokemon-list'),
+                    elTemplate = document.querySelector('.template'),
+                    form = document.querySelector('.form');
+                list.classList.add('gone');
+                elTemplate.classList.remove('gone');
+                form.classList.add('gone');
 
                 this.newData = JSON.parse(newRequest.responseText);
 
@@ -456,30 +480,28 @@ var api = { // object met .call, .orderPokemon, .makeList en .openPokemonInfo me
                     }
                 };
 
-                if (pokemonInfo.types.length > 1) {
-                    document.querySelector('.type1').innerHTML = "Type: " + pokemonInfo.types[0].type.name + " & ";
-                    document.querySelector('.type2').innerHTML = pokemonInfo.types[1].type.name;
-                } else {
-                    document.querySelector('.type1').innerHTML = "Type: " + pokemonInfo.types[0].type.name;
-                    document.querySelector('.type2').innerHTML = "";
-                }
-
                 setTimeout(function () {
                     template.classList.add('showPokemon');
                 }, 1);
 
                 Transparency.render(template, pokeInfo, sprites);
             }
+
+            var back = document.querySelector('.template a');
+
+            back.addEventListener('click', function () {
+                _sections2.default.back();
+            });
         };
 
         newRequest.onerror = function () {
             var loading = document.querySelector('.error');
-            loading.style.display = "none";
+            loading.classList.add('gone');
         };
 
         newRequest.timeout = function () {
-            var loading = document.querySelector('.error');
-            loading.style.display = "none";
+            var elTimeOut = document.querySelector('.timeOut');
+            loading.classList.add('gone');
         };
 
         newRequest.send();
@@ -521,7 +543,7 @@ var routes = {
             },
 
             'pokemon/:id': function pokemonId(obj) {
-                _api2.default.openPokemonInfo(obj);
+                _api2.default.pokemonDetail(obj);
             }
         });
     }
@@ -568,19 +590,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 	var template = document.querySelector('.template');
 
-	var cross = document.querySelector('.template a'),
+	var pokemonList = document.querySelector('.pokemon-list'),
 	    pokemonLink = document.querySelector('.pokemonlink');
 
 	pokemonLink.addEventListener('click', function () {
 		template.classList.remove('showPokemon');
 	});
-	cross.addEventListener('click', function () {
-		template.classList.remove('showPokemon');
-	});
+
 	// Start Application
 	_app2.default.init();
 })();
-},{"./app":7}],23:[function(require,module,exports) {
+},{"./app":7}],35:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -703,5 +723,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[23,5])
+},{}]},{},[35,5])
 //# sourceMappingURL=/dist/a37ddfbf3b40166cc41215b35ba9cf65.map

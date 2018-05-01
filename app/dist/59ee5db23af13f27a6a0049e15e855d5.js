@@ -138,7 +138,7 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":6}],20:[function(require,module,exports) {
+},{"_css_loader":6}],32:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -261,5 +261,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[20])
+},{}]},{},[32])
 //# sourceMappingURL=/dist/59ee5db23af13f27a6a0049e15e855d5.map

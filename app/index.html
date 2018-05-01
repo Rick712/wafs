@@ -28,42 +28,52 @@
 
         <div id="pokemon" class="no-display">
             <div>
-                <h1>Pokémon</h1>
 
-                <form>
-                    <input class="input" type="text">
-                    <a class="button">Search Pokémon</a>
-                </form>
+                <div class="form">
+                    <h1>Pokémon</h1>
+
+                    <form>
+                        <input class="input" type="text">
+                        <a class="button">Search Pokémon</a>
+                    </form>
+                </div>
 
                 <div class="loading">
                     <p>Loading list</p>
                 </div>
 
-                <div class="error">
+                <div class="error gone">
+                    <p>An error has occured. Please check your internet connection and try again. If this error keeps coming up, the API could be offline. Check avaiblility <a href="http://https://www.pokeapi.co/">Here</a></p>
+                </div>
+
+                <div class="timeOut gone">
                     <p>An error has occured. Please check your internet connection and try again.</p>
                 </div>
 
                 <ul class="pokemon-list">
                 </ul>
             </div>
-            <div class="template">
-                <a>X</a>
+            <div class="template gone">
+                <a>Terug</a>
                 <div class="pokemonlist">
-                    <h2 class="name"></h2>
+
+                    <h2 class="name">naam</h2>
+
                     <div class="sprites">
                         <img data-bind="front_default"/>
                         <img data-bind="back_default"/>
                     </div>
+
                     <div class="sprites_shiny">
                         <img data-bind="front_shiny"/>
                         <img data-bind="back_shiny"/>
                     </div>
-                    <div class="types">
-                        <p class="type1"></p>
-                        <p class="type2"></p>
+
+                    <div class="physical">
+                        <p class="height"></p>
+                        <p class="weight"></p>
                     </div>
-                    <p class="height"></p>
-                    <p class="weight"></p>
+
                     <div class="stats">
                         <p class="statsHp"></p>
                         <p class="statsAtt"></p>
@@ -72,6 +82,7 @@
                         <p class="statsSpAtt"></p>
                         <p class="statsSpDef"></p>
                     </div>
+
                 </section>
             </div>
         </div>

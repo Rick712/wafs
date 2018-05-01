@@ -9,7 +9,7 @@ const template = document.querySelector('.template'),
 let obj = {},
 	newObj = {} // JS declared de variables boven aan de scope
 
-const api = { // object met .call, .orderPokemon, .makeList en .openPokemonInfo method,
+const api = { // object met .call, .orderPokemon, .makeList en .pokemonDetail method,
     
     call: function() {
         const request = new XMLHttpRequest()
@@ -24,99 +24,105 @@ const api = { // object met .call, .orderPokemon, .makeList en .openPokemonInfo 
                 order.makeList(pokemon);
                 order.pokemon(pokemon)
 
-                // closure is een functie in een functie waar de parent functie nog steeds bij de child functie kan
+                // closure is een functie in een functie waar de child functie nog steeds bij de parent functie kan
 
                 const loading = document.querySelector('.loading')
-                loading.style.display = "none"
+                loading.classList.add('gone')
             }	
         }
         request.onerror = function() {
-            const loading = document.querySelector('.error')
-                loading.style.display = "block" // callback voor als er wat fout gaat
+            const elError = document.querySelector('.error')
+                elError.classList.remove('gone')
         }
 
         request.timeout = function() {
-            const loading = document.querySelector('.error')
-                loading.style.display = "block"
+            const elTimeOut = document.querySelector('.timeOut')
+                elTimeOut.classList.remove('gone')
         }
 
         request.send()
     },
 
-    openPokemonInfo: function(obj) {
+    pokemonDetail: function(obj) {
         const newRequest = new XMLHttpRequest()
         newRequest.open('GET', 'https://www.pokeapi.co/api/v2/pokemon/' + obj, true)
 
         newRequest.onload = function() {
 
-        if (newRequest.status >= 200 && newRequest.status < 400) {
-                    
-            this.newData = JSON.parse(newRequest.responseText)
+            if (newRequest.status >= 200 && newRequest.status < 400) {
 
-            const pokemonImages = this.newData.sprites,
-                pokemonInfo = this.newData,
-                pokeInfo = {
-                    name: pokemonInfo.name,
-                    height: 'Height: ' + pokemonInfo.height / 10 + ' meter',
-                    weight: 'Weight: ' + pokemonInfo.weight / 10 + ' kilogram',
-                    statsHP: 'HP: ' + pokemonInfo.stats[5].base_stat,
-                    statsDef: 'Defense: ' + pokemonInfo.stats[3].base_stat,
-                    statsAtt: 'Attack: ' + pokemonInfo.stats[4].base_stat,
-                    statsSpeed: 'Speed: ' + pokemonInfo.stats[0].base_stat,
-                    statsSpDef: 'Special Defense: ' + pokemonInfo.stats[1].base_stat,
-                    statsSpAtt: 'Special Attack: ' + pokemonInfo.stats[2].base_stat,
-                },	
+                const list = document.querySelector('.pokemon-list'),
+                    elTemplate = document.querySelector('.template'),
+                    form = document.querySelector('.form')
+                list.classList.add('gone')
+                elTemplate.classList.remove('gone')
+                form.classList.add('gone')
+                        
+                this.newData = JSON.parse(newRequest.responseText)
 
-            sprites = {
-                front_default: {
-                    src: function src() {
-                        return '' + pokemonInfo.sprites.front_default
-                    }
-                },
-                back_default: {
-                    src: function src() {
-                        return '' + pokemonInfo.sprites.back_default
-                    }
-                },
-                front_shiny: {
-                    src: function src() {
-                        return '' + pokemonInfo.sprites.front_shiny
-                    }
-                },
-                back_shiny: {
-                    src: function src() {
-                        return '' + pokemonInfo.sprites.back_shiny
+                const pokemonImages = this.newData.sprites,
+                    pokemonInfo = this.newData,
+                    pokeInfo = {
+                        name: pokemonInfo.name,
+                        height: 'Height: ' + pokemonInfo.height / 10 + ' meter',
+                        weight: 'Weight: ' + pokemonInfo.weight / 10 + ' kilogram',
+                        statsHP: 'HP: ' + pokemonInfo.stats[5].base_stat,
+                        statsDef: 'Defense: ' + pokemonInfo.stats[3].base_stat,
+                        statsAtt: 'Attack: ' + pokemonInfo.stats[4].base_stat,
+                        statsSpeed: 'Speed: ' + pokemonInfo.stats[0].base_stat,
+                        statsSpDef: 'Special Defense: ' + pokemonInfo.stats[1].base_stat,
+                        statsSpAtt: 'Special Attack: ' + pokemonInfo.stats[2].base_stat,
+                    },	
+
+                sprites = {
+                    front_default: {
+                        src: function src() {
+                            return '' + pokemonInfo.sprites.front_default
+                        }
+                    },
+                    back_default: {
+                        src: function src() {
+                            return '' + pokemonInfo.sprites.back_default
+                        }
+                    },
+                    front_shiny: {
+                        src: function src() {
+                            return '' + pokemonInfo.sprites.front_shiny
+                        }
+                    },
+                    back_shiny: {
+                        src: function src() {
+                            return '' + pokemonInfo.sprites.back_shiny
+                        }
                     }
                 }
-            }
-
-            if (pokemonInfo.types.length > 1) {
-                document.querySelector('.type1').innerHTML = "Type: " + pokemonInfo.types[0].type.name + " & "
-                document.querySelector('.type2').innerHTML = pokemonInfo.types[1].type.name
-            } else {
-                document.querySelector('.type1').innerHTML = "Type: " + pokemonInfo.types[0].type.name
-                document.querySelector('.type2').innerHTML = ""
-            }
-                        
+           
                 setTimeout(function(){
                     template.classList.add('showPokemon')
                 }, 1)
 
                 Transparency.render(template, pokeInfo, sprites)
-                
+                    
             }
+
+            const back = document.querySelector('.template a')
+
+            back.addEventListener('click', function () {
+                sections.back()
+            })
+
         }
-            
+                
         newRequest.onerror = function() {
             const loading = document.querySelector('.error')
-                loading.style.display = "none"
+                loading.classList.add('gone')
         }
 
         newRequest.timeout = function () {
-            const loading = document.querySelector('.error')
-                loading.style.display = "none"
+            const elTimeOut = document.querySelector('.timeOut')
+            loading.classList.add('gone')
         }
-            
+                
         newRequest.send()
     }
 }
