@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({13:[function(require,module,exports) {
+})({11:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -324,7 +324,7 @@ if (typeof module == 'undefined') {
 } else {
   module.exports = Routie(window, true);
 }
-},{}],14:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -514,7 +514,7 @@ var api = { // object met .call, .orderPokemon, .makeList en .pokemonDetail meth
 };
 
 exports.default = api;
-},{"./sections":13,"./routie":4,"./order":14}],10:[function(require,module,exports) {
+},{"./sections":11,"./routie":4,"./order":12}],10:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -555,7 +555,7 @@ var routes = {
 };
 
 exports.default = routes;
-},{"./sections":13,"./routie":4,"./api":9}],7:[function(require,module,exports) {
+},{"./sections":11,"./routie":4,"./api":9}],8:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -597,7 +597,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 	_app2.default.init();
 })();
-},{"./app":7}],35:[function(require,module,exports) {
+},{"./app":8}],13:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -619,7 +619,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57625' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59932' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -720,5 +720,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[35,5])
+},{}]},{},[13,5])
 //# sourceMappingURL=/dist/a37ddfbf3b40166cc41215b35ba9cf65.map

@@ -280,7 +280,7 @@ if (typeof module == 'undefined') {
 } else {
   module.exports = Routie(window, true);
 }
-},{}],15:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -302,7 +302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57625' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59932' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -403,5 +403,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[15,4])
+},{}]},{},[13,4])
 //# sourceMappingURL=/dist/3f839d91977ddf5ae53aeb9250ab26f5.map

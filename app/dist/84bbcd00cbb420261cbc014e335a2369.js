@@ -379,7 +379,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return t === !0 || t === !1;
     }, e.exports = r;
   }, {}] }, {}, [1]);
-},{}],15:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -401,7 +401,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57625' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59932' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -502,5 +502,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[15,3])
+},{}]},{},[13,3])
 //# sourceMappingURL=/dist/84bbcd00cbb420261cbc014e335a2369.map
